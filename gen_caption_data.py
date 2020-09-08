@@ -28,9 +28,14 @@ def gen_binary_multi_soft_data_with_pixel():
 
 	for m in mode:
 		output_ = []
-		out_file = open('./data/binary_all_multi_soft_withpixel/{}.pkl'.format(m),'wb')
-		im_dir = '/m/tiangy/coco_stuff_anno/{}2017/'.format(m)
-		file = json.load(open('/m/data/mscoco/annotations/captions_{}2017.json'.format(m)))
+		out_file = open('data/binary_all_multi_soft_withpixel/{}.pkl'.format(m),'wb')
+		#####################
+		'''
+		replace the two dir paths below with your own path.
+		'''
+		im_dir = 'data/coco_stuff_anno/{}2017/'.format(m) #the path to cocostuff annotation dir
+		file = json.load(open('data/datasets/cocostuff/dataset/annotations/captions_{}2017.json'.format(m)))# the path to coco dataset
+		#####################
 		for i_,f in enumerate(file['annotations']):
 			caption = f['caption']
 			im = cv2.imread(im_dir+ '{0:012d}.png'.format(f['image_id']), cv2.IMREAD_GRAYSCALE)
