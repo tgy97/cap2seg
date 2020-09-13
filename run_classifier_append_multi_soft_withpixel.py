@@ -574,9 +574,6 @@ def main():
     parser.add_argument("--loss_type",
                         default='bce',
                         type=str) 
-    parser.add_argument("--class_rank_file",
-                        default=None,
-                        type=str) 
     parser.add_argument("--pixel_model",
                         default=None,
                         type=str)
@@ -690,7 +687,6 @@ def main():
     cls_emb = emb[all_label_class]
     novel_cls_emb = emb[novel_class]
 
-    class_rank = np.load(args.class_rank_file) # absolute
 
 
     processors = {
@@ -970,7 +966,7 @@ def main():
         torch.save(model_to_save_pixel.state_dict(),os.path.join(args.output_dir,'pixel_model.bin'))
 
     if args.do_eval:
-        all_labels  = np.genfromtxt('/scratch/tiangy/bert/model_split/labels_2.txt', delimiter='\t', usecols=1, dtype='str') #abosolute
+        all_labels  = np.genfromtxt('model_split/labels_2.txt', delimiter='\t', usecols=1, dtype='str') #abosolute
         eval_examples = processor.get_dev_examples(args.data_dir,cls_map,all_labels, unseen_class = novel_class)
         eval_features = convert_examples_to_features(
             eval_examples, args.max_seq_length, tokenizer)
@@ -1083,7 +1079,7 @@ def main():
         #         logger.info("  %s = %s", key, str(result[key]))
         #         writer.write("%s = %s\n" % (key, str(result[key])))
     if args.do_eval_pixel:
-        all_labels  = np.genfromtxt('/scratch/tiangy/bert/model_split/labels_2.txt', delimiter='\t', usecols=1, dtype='str') #abosolute
+        all_labels  = np.genfromtxt('model_split/labels_2.txt', delimiter='\t', usecols=1, dtype='str') #abosolute
         eval_examples = processor.get_dev_pixel_examples(args.data_dir,cls_map,all_labels, unseen_class = novel_class)
         eval_features = eval_examples
         # eval_features = convert_examples_to_features(
@@ -1202,7 +1198,7 @@ def main():
         pickle.dump([ans,ans_loc],out_file)
 
     if args.do_eval_pixel_ac:
-        all_labels  = np.genfromtxt('/scratch/tiangy/bert/model_split/labels_2.txt', delimiter='\t', usecols=1, dtype='str') #abosolute
+        all_labels  = np.genfromtxt('model_split/labels_2.txt', delimiter='\t', usecols=1, dtype='str') #abosolute
         eval_examples = processor.get_dev_pixel_ac_examples(args.data_dir,cls_map,all_labels, unseen_class = novel_class)
         eval_features = eval_examples
         # eval_features = convert_examples_to_features(
