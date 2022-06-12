@@ -4,7 +4,7 @@ This repo contains our core implementation of our paper "Cap2Seg: Inferring Sema
 
 ## Dataset
 Follow the instruction in https://github.com/subhc/SPNet to prepare cocostuff dataset.
-##Usage
+## Usage
 train and eval zero shot segmentation model:
 
 * `sh scripts/run_rank_loc.sh`
